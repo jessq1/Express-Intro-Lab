@@ -19,7 +19,11 @@ app.set(
 app.set('view engine', 'ejs')
 
 // Mount middelware (app.use)
-app.use(express.urlencoded({ extended: false }))
+app.use(
+  express.static(
+    path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')
+  )
+)
 
 //Mount routes
 
