@@ -1,5 +1,7 @@
 //import modules
 import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import * as student from './data/student.js'
 
 
@@ -7,15 +9,22 @@ import * as student from './data/student.js'
 
 const app = express()
 
+//view engine
+app.set(
+    'views',
+    path.join(path.dirname(fileURLToPath(import.meta.url)), 'views')
+  )
+
 // configure the app (app.set)
 app.set('view engine', 'ejs')
 
 // Mount middelware (app.use)
+app.use(express.urlencoded({ extended: false }))
 
 //Mount routes
 
 app.get('/', function(req, res) {
-    res.redirect('/student')
+    res.redirect('/home')
   })
   app.get('/home', function(req, res) {
     res.render('home')
